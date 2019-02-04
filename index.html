@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Piano Code by Caroline Gabriel  -->
+  <title>Piano</title>
+  <style type="text/css">
+    html  {
+      background: #000;
+      font-family: 'Noto Serif', serif;
+      -webkit-font-smoothing: antialiased;
+      text-align: center;
+    }
+    header {
+      position: relative;
+      margin: 30px 0;
+    }
+    header:after {
+      content: '';
+      width: 460px;
+      height: 15px;
+      display: inline-block;
+      text-align: center;
+      background-size: 70%;
+    }
+    h1 {
+      color: #fff;
+      font-size: 50px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    h2 {
+      color: #fff;
+      font-size: 24px;
+      font-style: italic;
+      font-weight: 400;
+      margin: 0 0 30px;
+    }
+    .nowplaying {
+      font-size: 120px;
+      line-height: 1;
+      color: #eee;
+      text-shadow: 0 0 5rem #028ae9;
+      transition: all .07s ease;
+      min-height: 120px;
+    }
+    .keys {
+      display: block;
+      width: 100%;
+      height: 350px;
+      max-width: 880px;
+      position: relative;
+      margin: 40px auto 0;
+      cursor: none;
+    }
+    .key {
+      position: relative;
+      border: 4px solid black;
+      border-radius: .5rem;
+      transition: all .07s ease;
+      display: block;
+      box-sizing: border-box;
+      z-index: 2;
+    }
+    .key:not(.sharp) {
+      float: left;
+      width: 10%;
+      height: 100%;
+      background: rgba(255, 255, 255, .8);
+    }
+    .key.sharp {
+      position: absolute;
+      width: 6%;
+      height: 60%;
+      background: #000;
+      color: #eee;
+      top: 0;
+      z-index: 3;
+    }
+    .key[data-key="87"] {
+      left: 7%;
+    }
+    .key[data-key="69"] {
+      left: 17%;
+    }
+    .key[data-key="84"]  {
+      left: 37%;
+    }
+    .key[data-key="89"] {
+      left: 47%;
+    }
+    .key[data-key="85"] {
+      left: 57%;
+    }
+    .key[data-key="79"] {
+      left: 77%;
+    }
+    .key[data-key="80"] {
+      left: 87%;
+    }
+    .playing {
+      transform: scale(.95);
+      border-color: #028ae9;
+      box-shadow: 0 0 1rem #028ae9;
+    }
+    .hints {
+      display: block;
+      width: 100%;
+      opacity: 0;
+      position: absolute;
+      bottom: 7px;
+      transition: opacity .3s ease-out;
+      font-size: 20px;
+    }
+
+    .keys:hover .hints {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+  <section id="wrap">
+    <header>
+      <h1>Onchain Piano</h1>
+      <h2>Use your keyboard.</h2>
+    </header>
+    <section id="main">
+      <div class="nowplaying"></div>
+      <div class="keys">
+        <div data-key="65" class="key" data-note="C">
+            <span class="hints">A</span>
+        </div>
+        <div data-key="87" class="key sharp" data-note="C#">
+            <span class="hints">W</span>
+        </div>
+        <div data-key="83" class="key" data-note="D">
+            <span class="hints">S</span>
+        </div>
+        <div data-key="69" class="key sharp" data-note="D#">
+            <span class="hints">E</span>
+        </div>
+        <div data-key="68" class="key" data-note="E">
+            <span class="hints">D</span>
+        </div>
+        <div data-key="70" class="key" data-note="F">
+            <span class="hints">F</span>
+        </div>
+        <div data-key="84" class="key sharp" data-note="F#">
+            <span class="hints">T</span>
+        </div>
+        <div data-key="71" class="key" data-note="G">
+            <span class="hints">G</span>
+        </div>
+        <div data-key="89" class="key sharp" data-note="G#">
+            <span class="hints">Y</span>
+        </div>
+        <div data-key="72" class="key" data-note="A">
+            <span class="hints">H</span>
+        </div>
+        <div data-key="85" class="key sharp" data-note="A#">
+            <span class="hints">U</span>
+        </div>
+        <div data-key="74" class="key" data-note="B">
+            <span class="hints">J</span>
+        </div>
+        <div data-key="75" class="key" data-note="C">
+            <span class="hints">K</span>
+        </div>
+        <div data-key="79" class="key sharp" data-note="C#">
+            <span class="hints">O</span>
+        </div>
+        <div data-key="76" class="key" data-note="D">
+            <span class="hints">L</span>
+        </div>
+        <div data-key="80" class="key sharp" data-note="D#">
+            <span class="hints">P</span>
+        </div>
+        <div data-key="59" class="key" data-note="E">
+            <span class="hints">&Ouml</span>
+        </div>
+      </div>
+        <audio data-key="65" src="b://ea788208e3263a6b2afda587fbf041ff9bac71120c08a8843f0ffb31dab2a83d"></audio>
+        <audio data-key="87" src="b://8d17cfa31520f68ec78fbec2adcf28f4057651b7c9ecd58653decd7320539b6d"></audio>
+        <audio data-key="83" src="b://3f484272d68d0e3358d2e5fdd60d2c31fbd69c44d0bdf728e966e5e06e5d3ea8"></audio>
+        <audio data-key="69" src="b://1f646485d89b5c4b0749f5326293faf1c18dcfd2f325f2685d2590f7d865a039"></audio>
+        <audio data-key="68" src="b://c3ecafe699b62fb13612f97eb504778515babd66a80f9b4c047f8b0dd0f400eb"></audio>
+        <audio data-key="70" src="b://91c98baa06b5ae60b0250b98d5795d6e4b6729d903e83c80b97abe609fe61c06"></audio>
+        <audio data-key="84" src="b://2c5a622f2a5c123d6dcd4dc2d68570024e956bd2013370b8fc1b2edbc00acbe3"></audio>
+        <audio data-key="71" src="b://5212eaa5bad9ad5322b8ab0048d4071e1b0a21aded209eb3c669e81e2730b5dc"></audio>
+        <audio data-key="89" src="b://b50af62e815a36a6380f43c75aee7e2c2bcda68834e8a9e0822d4c22c6f93d72"></audio>
+        <audio data-key="72" src="b://362df6b06339213c11ceb72af985b5aae0db14d4ba3017d43cd3912d0ac24e76"></audio>
+        <audio data-key="85" src="b://c12d21186c674916f2e5437f31a36888e05354fc97d0f6f365044926c7b1e927"></audio>
+        <audio data-key="74" src="b://08b2ff0a053c7f84c62efc55d86c5ecae5634f72d8496ca6e3c7a732a434c406"></audio>
+        <audio data-key="75" src="b://76d440507d3818ec07c1c35099839f5217c7f2a7ee8460c1899b769a2148e7f4"></audio>
+        <audio data-key="79" src="b://43f035c844b9d0071b51fc32ad39779e579cd35acf1a921293e7a60156c6d0ff"></audio>
+        <audio data-key="76" src="b://3f494dcfb8041f98ec96f2d10cd1f8178c457b46e400e3de61f63707659f8e15"></audio>
+        <audio data-key="80" src="b://09101e0d342bb36286e9091b61419345de8fe62fa72a8f78cd643072efa5c0f9"></audio>
+        <audio data-key="59" src="b://00b4181c7c0d2d5886f504f31c47a3e809089c5459202541acef61b0eb6ef466"></audio>
+      </section>
+  </section>
+    <script>
+      const  keys = document.querySelectorAll('.key'),
+      note = document.querySelector('.nowplaying'),
+      hints = document.querySelectorAll('.hints');
+
+      function playNote(e){
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`),
+        key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if(!key) return;
+        const keyNote = key.getAttribute('data-note');
+        key.classList.add('playing');
+        note.innerHTML = keyNote;
+        audio.currentTime = 0;
+        audio.play();
+      }
+
+      function removeTransition(e){
+        if(e.propertyName !== 'transform') return;
+        this.classList.remove('playing');
+      }
+
+      function hintsOn(e, index){
+        e.setAttribute('style', 'transition-delay:' + index * 50 + 'ms');
+      }
+      hints.forEach(hintsOn);
+      keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+      window.addEventListener('keydown', playNote);
+      if(typeof window.ontouchstart !== 'undefined')  alert('This feature requires a physical keyboard :(');
+    </script>
+  </body>
+  </html>
